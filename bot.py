@@ -13,10 +13,20 @@ print(INITIAL_CHANNELS)
 
 DISCORD_INVITE=os.getenv('DISCORD_INVITE')
 
+initial_cogs = [
+    "cogs.basic"
+]
+
 class Bot(commands.Bot):
 
     def __init__(self):
         super().__init__(token=TOKEN, prefix='?', initial_channels=INITIAL_CHANNELS)
+
+        for cog in initial_cogs:
+            try:
+                self.load_module(cog)
+            except Exception as e:
+                print(f"Failed to load cog {cog}.", e)
 
     async def event_ready(self):
         print(f'Logged in as | {self.nick}')
@@ -113,14 +123,6 @@ class Bot(commands.Bot):
                 i += 1
             new = ' '.join(liz)
             await ctx.send(new)
-
-
-
-
-
-
-
-
 
 
 CobBot = Bot()
