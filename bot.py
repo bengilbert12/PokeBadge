@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from utils import create_poke, get_poke, get_trainer, level_up_poke
 
 
-load_dotenv()
+load_dotenv(override=True)
 
 TOKEN = os.getenv("TOKEN")
 INITIAL_CHANNELS = os.getenv("INITIAL_CHANNELS").split(',')
