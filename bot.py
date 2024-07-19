@@ -15,7 +15,8 @@ DISCORD_INVITE=os.getenv('DISCORD_INVITE')
 
 initial_cogs = [
     "cogs.basic",
-    "cogs.dyna"
+    "cogs.dyna",
+    "cogs.admin"
 ]
 
 class Bot(commands.Bot):
