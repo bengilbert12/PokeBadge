@@ -14,7 +14,8 @@ print(INITIAL_CHANNELS)
 DISCORD_INVITE=os.getenv('DISCORD_INVITE')
 
 initial_cogs = [
-    "cogs.basic"
+    "cogs.basic",
+    "cogs.dyna"
 ]
 
 class Bot(commands.Bot):
@@ -103,26 +104,6 @@ class Bot(commands.Bot):
 
         await ctx.send(f'{ctx.author.name} is rocking a level {trainer["level"]} {pokemon}. Nice!')
 
-
-    @commands.command()
-    async def pep(self, ctx: commands.Context):
-        if not ctx.channel.name == "dynamungo":
-            await ctx.send(f"pep yourself {ctx.author.name} *copyright Phizzbot")
-
-    @commands.command()
-    async def pepify(self, ctx: commands.Context):
-        if not ctx.channel.name == "dynamungo":
-            phrase = ctx.message.content
-            if phrase == '':
-                return
-            liz = phrase.split()
-            i = 0
-            for word in liz:
-                if len(word) <= 3:
-                    liz[i] = 'pep'
-                i += 1
-            new = ' '.join(liz)
-            await ctx.send(new)
 
 
 CobBot = Bot()
