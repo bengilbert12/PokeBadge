@@ -47,7 +47,7 @@ def create_poke(streamer, user):
     trainer_table = db.table("trainers")
     random_poke = get_random_poke()
     Trainer = Query()
-    if streamer == 'dynamungo':
+    if streamer in ['dynamungo', 'professorjolteon', 'livekezin']:
         random_poke = 'Pep' + random_poke[3:]
     trainer_table.update(set("pokemon", random_poke), ((Trainer.name == user) & (Trainer.streamer == streamer)))
     return random_poke
