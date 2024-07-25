@@ -1,4 +1,5 @@
 from twitchio.ext import commands
+from utils import *
 
 class AdminCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -46,6 +47,21 @@ class AdminCog(commands.Cog):
         else:
             await ctx.send(f"Reloaded '{module}'")
             print(f"Reloaded '{module}'")
+    
+    @commands.command()
+    async def shiny(self, ctx: commands.Context, trainer):
+        poke = convert_poke_to_shiny(ctx.channel.name, trainer)
+        user = get_trainer(ctx.channel.name, trainer)
+        if not poke:
+            await ctx.send('No mon to Shiny')
+        await ctx.send(f"{user['name']} now has a {user['pokemon']}!!")
+
+    @commands.command()
+    async def dbreset(self, ctx: commands.Context, streamer):
+        dbreset(streamer)
+        await ctx.send(f"{streamer}'s channel can level again!")
+
+
 
 def prepare(bot: commands.Bot):
     bot.add_cog(AdminCog(bot))

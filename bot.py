@@ -1,7 +1,7 @@
 import os
 from twitchio.ext import commands
 from dotenv import load_dotenv
-from utils import create_poke, get_poke, get_trainer, level_up_poke
+from utils import create_poke, get_poke, get_shiny, get_trainer, level_up_poke, reset_poke
 
 
 load_dotenv(override=True)
@@ -96,7 +96,7 @@ class Bot(commands.Bot):
         await ctx.send(f'{ctx.author.name}: your {poke} is now level {level}!') 
         
 
-    @commands.command()
+    @commands.command(aliases=['pepflex'])
     async def pokeflex(self, ctx: commands.Context):
         pokemon = get_poke(ctx.channel.name, ctx.author.name)
         trainer = get_trainer(ctx.channel.name, ctx.author.name)
@@ -104,6 +104,29 @@ class Bot(commands.Bot):
             await ctx.send(f'It seems {ctx.author.name} does not yet have a pokemon. Try ?pokegen')
 
         await ctx.send(f'{ctx.author.name} is rocking a level {trainer["level"]} {pokemon}. Nice!')
+    
+    @commands.command(aliases=['reset'])
+    async def poke_reset(self, ctx: commands.Context):
+        trainer = get_trainer(ctx.channel.name, ctx.author.name)
+        test = trainer['can_level']
+        if test:
+            new_poke = reset_poke(ctx.channel.name, ctx.author.name)
+            await ctx.send(f"{ctx.author.name}'s has discarded their old partner in favor of {new_poke}. Shame them")
+        else:
+            await ctx.send(f'You have already levelled up or reset this stream. Come back next time!')
+    
+    @commands.command(aliases=['yaboi'])
+    async def shinydex(self, ctx: commands.Context, *args):
+        if len(args) > 1:
+            poke_name = ' '.join(args)
+        else:
+            poke_name = args[0]
+        mon = get_shiny(poke_name)
+        if not mon:
+            await ctx.send('no result')
+            return
+        color = mon[0]['color']
+        await ctx.send(f"{poke_name}'s shiny is {color}")
 
 
 

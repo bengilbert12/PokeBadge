@@ -13,24 +13,21 @@ class DynaCog(commands.Cog):
         self.bot = bot
 
     async def cog_check(self, ctx: commands.Context) -> Coroutine[Any, Any, bool]:
-        return ctx.channel.name in ['dynamungo', 'professorjolteon', 'livekezin']
+        return ctx.channel.name in ['dynamungo', 'professorjolteon', 'livekezin','jholl0']
     
     @commands.command()
     async def pep(self, ctx: commands.Context):
         await ctx.send(f"pep yourself {ctx.author.name} *copyright Phizzbot")
 
     @commands.command()
-    async def pepify(self, ctx: commands.Context):
-        phrase = ctx.message.content
-        if phrase == '':
-            return
-        liz = phrase.split()
-        i = 0
-        for word in liz:
+    async def pepify(self, ctx: commands.Context, *args):
+        if not args:
+            await ctx.send('Nothing to pep')
+        phrase = list(args)
+        for index, word in enumerate(phrase):
             if len(word) <= 3:
-                liz[i] = 'pep'
-            i += 1
-        new = ' '.join(liz)
+                phrase[index] = 'pep'
+        new = ' '.join(phrase)
         await ctx.send(new)
 
     @commands.command()
