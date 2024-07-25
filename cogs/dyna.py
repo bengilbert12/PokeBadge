@@ -13,7 +13,7 @@ class DynaCog(commands.Cog):
         self.bot = bot
 
     async def cog_check(self, ctx: commands.Context) -> Coroutine[Any, Any, bool]:
-        return ctx.channel.name in ['dynamungo', 'professorjolteon', 'livekezin','jholl0']
+        return ctx.channel.name in ['dynamungo', 'professorjolteon', 'livekezin','jholl0','benyonce12']
     
     @commands.command()
     async def pep(self, ctx: commands.Context):
@@ -82,6 +82,13 @@ class DynaCog(commands.Cog):
     @commands.command()
     async def son(self, ctx: commands.Context):
         await ctx.send('Yes daddy dearest? uwu')
+
+    @commands.command()
+    async def combo(self, ctx: commands.Context, *args):
+        if len(args) != 3:
+            await ctx.send('I need three words to combo')
+        await ctx.send(f'She {args[0]} on my {args[1]} until I {args[2]}')
+
 
 
 
