@@ -1,0 +1,10 @@
+version: '3'
+services:
+  pokebadge:
+    container_name: pokebadge
+    build: .
+    command: python3 -u src/bot.py
+    volumes:
+      - ./.env:/code/.env
+      - ./db.json:/code/db.json
+    restart: unless-stopped
