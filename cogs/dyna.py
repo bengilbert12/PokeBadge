@@ -1,6 +1,7 @@
 from typing import Any, Coroutine
 from twitchio.ext import commands
 import random
+from utils import *
 
 
 phrases = ['Watch out\'m gonna pep!', "One small pep for man, one giant pep for mankind", 'Would you rather goon or edge?', 'certified mewer', 'certified pepper', 'its all skibidi my little rizzler', 'pep YOU, pep YOU, pep EVERYONE', 'chill im gonna pep my pants', 'im here to pep and pep, and im all out of gum..']
@@ -88,6 +89,11 @@ class DynaCog(commands.Cog):
         if len(args) != 3:
             await ctx.send('I need three words to combo')
         await ctx.send(f'She {args[0]} on my {args[1]} until I {args[2]}')
+
+    @commands.command()
+    async def skibidi(self, ctx: commands.Context):
+        trainer = get_trainer(ctx.channel.name, ctx.author.name)
+        await ctx.send(f"OH NO! The Rizzler found {trainer['name']}'s {trainer['pokemon']} and griddied all over it! Now {trainer['pokemon']} has Pokerus. NOT SIGMA")
 
 
 

@@ -106,4 +106,3 @@ def get_shiny(mon):
     shiny = shiny_table.search((Mon.name == mon.title()))
     print(shiny)
     return shiny
-    

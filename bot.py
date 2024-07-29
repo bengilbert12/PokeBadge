@@ -17,12 +17,13 @@ initial_cogs = [
     "cogs.basic",
     "cogs.dyna",
     "cogs.admin",
-    "cogs.streamer"
+    "cogs.streamer",
+    "cogs.cob"
 ]
 
 class Bot(commands.Bot):
 
-    def __init__(self):
+    def __init__(self): 
         super().__init__(token=TOKEN, prefix='?', initial_channels=INITIAL_CHANNELS)
 
         for cog in initial_cogs:
@@ -46,7 +47,7 @@ class Bot(commands.Bot):
         await ctx.send(f'Hello {ctx.author.name}!')
 
     @commands.command()
-    async def discord(self, ctx: commands.Context):
+    async def botdiscord(self, ctx: commands.Context):
         await ctx.send(f"Join our Discord at {DISCORD_INVITE}")
 
     @commands.command()
@@ -128,6 +129,19 @@ class Bot(commands.Bot):
             return
         color = mon[0]['color']
         await ctx.send(f"{poke_name}'s shiny is {color}")
+
+    @commands.command()
+    async def dex(self, ctx: commands.Context, *args):
+        if len(args) > 1:
+            poke_name = ' '.join(args)
+        else:
+            poke_name = args[0]
+        mon = get_shiny(poke_name)
+        if not mon:
+            await ctx.send('no result')
+            return
+        await ctx.send(f"{mon[0]['name']}:  type:{mon[0]['type']}   color:{mon[0]['color']}   shiny:{mon[0]['shiny']}")
+        
 
 
 
